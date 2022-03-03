@@ -11,7 +11,7 @@ for env_var in os.environ:
 try: 
     dc = docker.from_env()
     print("Got Docker Client")
-    print(dc.info)
+    print(dc.info())
     containers = dc.containers.list(all=True)
     print("Got Container List")
 
