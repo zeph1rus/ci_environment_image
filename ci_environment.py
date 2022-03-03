@@ -1,22 +1,20 @@
 import time
 import os
 import docker
-from beautifultable import BeautifulTable
 
 hostName = ""
 hostPort = 8086
 
-env_table = BeautifulTable()
-
 for env_var in os.environ:
-    env_table.rows.append([env_var, os.environ[env_var]])
-env_table.columns.header = ["var", "value"]
-print(env_table)
+    print(f"{env_var} : {os.environ[env_var]}")
 
 try: 
     dc = docker.from_env()
+    print("Got Docker Client")
+    print(dc.info)
     containers = dc.containers.list(all=True)
- 
+    print("Got Container List")
+
     for image in containers:
         print(f"Container: {image.name}")
         print(f"    id: {image.id}")
